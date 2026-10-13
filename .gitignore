@@ -1,0 +1,18 @@
+# build output
+*.o
+loader/jsrf.exe
+tools/fakexi/xinput1_4.dll
+build/
+dist/
+
+# what jsrf.exe writes next to itself when run from the tree
+jsrf.ini
+jsrf.ini.tmp
+jsrf.log
+shot_*.bmp
+_hdd/
+
+# game files never go in the repository
+default.xbe
+Media/
+*.iso

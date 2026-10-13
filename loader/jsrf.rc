@@ -1,0 +1,36 @@
+/* SPDX-License-Identifier: GPL-2.0-or-later */
+/* Icon, version information and manifest for jsrf.exe. */
+#include <winver.h>
+#include "version.h"
+
+1 ICON "res/jsrf.ico"
+1 24 "res/jsrf.manifest"
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION     JSRF_VERSION_MAJOR, JSRF_VERSION_MINOR, JSRF_VERSION_PATCH, 0
+PRODUCTVERSION  JSRF_VERSION_MAJOR, JSRF_VERSION_MINOR, JSRF_VERSION_PATCH, 0
+FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK
+FILEFLAGS       0
+FILEOS          VOS_NT_WINDOWS32
+FILETYPE        VFT_APP
+FILESUBTYPE     VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "FileDescription",  "Jet Set Radio Future loader for Windows"
+            VALUE "FileVersion",      JSRF_VERSION_STR
+            VALUE "InternalName",     "jsrf"
+            VALUE "OriginalFilename", "jsrf.exe"
+            VALUE "ProductName",      JSRF_PRODUCT
+            VALUE "ProductVersion",   JSRF_VERSION_STR
+            VALUE "LegalCopyright",   "Copyright (C) 2026 jcarr710. GNU GPL v2 or later."
+            VALUE "Comments",         "Fan project, not affiliated with SEGA. Needs your own copy of the game."
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END

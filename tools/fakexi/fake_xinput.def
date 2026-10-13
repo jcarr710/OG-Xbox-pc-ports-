@@ -1,0 +1,8 @@
+; SPDX-License-Identifier: GPL-2.0-or-later
+; Exports of the stand-in xinput1_4.dll (fake_xinput.c), undecorated as in the real DLL.
+LIBRARY xinput1_4.dll
+EXPORTS
+XInputGetState=XInputGetState@8
+XInputSetState=XInputSetState@8
+XInputGetCapabilities=XInputGetCapabilities@12
+XInputEnable=XInputEnable@4
