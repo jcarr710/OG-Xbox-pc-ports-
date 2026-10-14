@@ -59,6 +59,10 @@ jobs:
           pkg="$game-pc-$version"
           files="dist/$pkg-windows.zip dist/$pkg-source.zip dist/SHA256SUMS-$pkg.txt"
           if gh release view "$TAG" >/dev/null 2>&1; then
+            # Publishing a release on the website also pushes its new tag; that
+            # second run leaves the files to the release run, so the zips and
+            # their checksums always come from the same build.
+            if [ "${{ github.event_name }}" = push ]; then echo "release $TAG exists; the release run attaches the files"; exit 0; fi
             gh release upload "$TAG" $files --clobber
           else
             # this game's section of the changelog
