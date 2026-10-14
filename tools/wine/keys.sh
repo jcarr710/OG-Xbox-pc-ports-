@@ -3,10 +3,10 @@
 # keys.sh: the settings menu from the keyboard (needs xdotool): F1 opens it,
 # arrows change two settings, F12 takes a screenshot, Esc closes it.
 . "$(dirname "$0")/common.sh"
-rm -f jsrf.ini
+rm -f $INI
 export JSRF_SHOT_OVERLAY=1
 xvfb_run 60 bash -c '
-  wine jsrf.exe --window=960x720 > wine.txt 2>&1 &
+  wine $EXE --window=960x720 > wine.txt 2>&1 &
   sleep 12
   W=$(xdotool search --name "Jet Set Radio" | head -1)
   xdotool windowfocus --sync $W 2>/dev/null; sleep 1
@@ -19,6 +19,6 @@ xvfb_run 60 bash -c '
 shots_to_png
 ini_values
 for kv in Filter=1 Brightness=110; do
-    grep -aq "^$kv" jsrf.ini || { echo "expected $kv in jsrf.ini"; exit 1; }
+    grep -aq "^$kv" $INI || { echo "expected $kv in $INI"; exit 1; }
 done
 echo "keys: OK"

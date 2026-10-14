@@ -10,7 +10,7 @@ make -s -C "$ROOT/tools/fakexi" && cp "$ROOT/tools/fakexi/xinput1_4.dll" .
 S="START@128:2,START@140:1,A@150:1"
 for t in $(seq 165 6 285); do S="$S,A@$t:1"; done
 export FAKE_XINPUT_SCRIPT="$S" WINEDLLOVERRIDES="xinput1_4=n"
-xvfb_run "$secs" bash -c "timeout $secs wine jsrf.exe --window=640x480 --scale=1 --screenshots=600 $* > wine.txt 2>&1"
+xvfb_run "$secs" bash -c "timeout $secs wine $EXE --window=640x480 --scale=1 --screenshots=600 $* > wine.txt 2>&1"
 rm -f xinput1_4.dll
 shots_to_png
-grep -a "is player 1" jsrf.log || { echo "the scripted pad never became player 1"; exit 1; }
+grep -a "is player 1" $LOG || { echo "the scripted pad never became player 1"; exit 1; }

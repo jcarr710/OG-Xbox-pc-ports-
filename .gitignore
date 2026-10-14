@@ -1,18 +1,27 @@
 # build output
 *.o
-loader/jsrf.exe
-tools/fakexi/xinput1_4.dll
 build/
 dist/
+tools/fakexi/xinput1_4.dll
 
-# what jsrf.exe writes next to itself when run from the tree
+# what the exes write next to themselves when run from the tree
 jsrf.ini
 jsrf.ini.tmp
 jsrf.log
+mc3.ini
+mc3.ini.tmp
+mc3.log
 shot_*.bmp
 _hdd/
+control.txt
+capture.txt
+cap*.bmp
 
 # game files never go in the repository
 default.xbe
+*.xbe
 Media/
 *.iso
+*.dat
+*.dat_*
+*.bik
