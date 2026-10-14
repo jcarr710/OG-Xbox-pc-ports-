@@ -1,13 +1,18 @@
 # Builds every game's exe and release zips on each push and pull request.
-# Pushing a tag <game>-v<version> (jsrf-v0.1.0, mc3-v0.1.0) also drafts a
-# GitHub release with that game's zips, its checksums, and its section of
-# CHANGELOG.md as the notes.
+#
+# Releases: a tag <game>-v<version> (jsrf-v0.1.0, mc3-v0.1.0) gets that
+# game's zips and checksums attached, whichever way it's made:
+#   - publish a release with a new tag on github.com: the zips are added to it
+#   - push the tag: a draft release is created with the zips and the game's
+#     section of CHANGELOG.md as its notes
 name: build
 on:
   push:
     branches: [main]
     tags: ['*-v*']
   pull_request:
+  release:
+    types: [published]
   workflow_dispatch:
 
 permissions:
@@ -37,20 +42,26 @@ jobs:
             dist/*.zip
             dist/SHA256SUMS-*.txt
 
-      - name: Draft a release
-        if: startsWith(github.ref, 'refs/tags/')
+      - name: Attach to the release
+        if: github.event_name == 'release' || startsWith(github.ref, 'refs/tags/')
         env:
           GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event_name == 'release' && github.event.release.tag_name || github.ref_name }}
         run: |
-          game=${GITHUB_REF_NAME%%-v*}
-          version=${GITHUB_REF_NAME#*-v}
+          game=${TAG%%-v*}
+          version=${TAG#*-v}
+          [ -f "titles/$game/version.h" ] || { echo "$TAG isn't a <game>-v<version> tag; nothing to attach"; exit 0; }
           product=$(sed -n 's/^#define TITLE_PRODUCT *"\(.*\)"/\1/p' "titles/$game/version.h")
           built=$(sed -n 's/^#define TITLE_VERSION_STR *"\(.*\)"/\1/p' "titles/$game/version.h")
           if [ "$built" != "$version" ]; then
-            echo "tag $GITHUB_REF_NAME doesn't match titles/$game/version.h ($built)"; exit 1
+            echo "tag $TAG doesn't match titles/$game/version.h ($built)"; exit 1
           fi
-          # this game's section of the changelog
-          awk -v h="## $product $version" 'index($0, h) == 1 { on = 1; next } on && /^## / { exit } on' CHANGELOG.md > notes.md
           pkg="$game-pc-$version"
-          gh release create "$GITHUB_REF_NAME" "dist/$pkg-windows.zip" "dist/$pkg-source.zip" "dist/SHA256SUMS-$pkg.txt" \
-            --draft --title "$product $version" --notes-file notes.md
+          files="dist/$pkg-windows.zip dist/$pkg-source.zip dist/SHA256SUMS-$pkg.txt"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" $files --clobber
+          else
+            # this game's section of the changelog
+            awk -v h="## $product $version" 'index($0, h) == 1 { on = 1; next } on && /^## / { exit } on' CHANGELOG.md > notes.md
+            gh release create "$TAG" $files --draft --title "$product $version" --notes-file notes.md
+          fi

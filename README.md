@@ -370,8 +370,8 @@ The exes are 32-bit Windows programs built with MinGW-w64.
 That builds `build/jsrf.exe` and `build/mc3.exe` (`make jsrf` or `make mc3`
 builds one). `make dist T=mc3` also builds that game's release zips and
 checksums in `dist/`. GitHub Actions builds both on every push
-(`.github/workflows/build.yml`) and drafts a release when a tag like
-`mc3-v0.1.0` is pushed.
+(`.github/workflows/build.yml`) and attaches the zips to releases tagged
+like `mc3-v0.1.0`.
 
 On Linux, `tools/wine/` has the headless test scripts used during
 development: booting with scripted input, the settings menu, the log window,
