@@ -4,7 +4,7 @@
 #define TITLE_VERSION_MAJOR 0
 #define TITLE_VERSION_MINOR 2
 #define TITLE_VERSION_PATCH 0
-#define TITLE_VERSION_STR   "0.2.0-dev"
+#define TITLE_VERSION_STR   "0.2.0"
 #define TITLE_PRODUCT       "JSRF PC"
 #define TITLE_GAME          "Jet Set Radio Future"
 #define TITLE_STEM          "jsrf"

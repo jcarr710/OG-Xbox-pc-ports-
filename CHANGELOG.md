@@ -4,11 +4,14 @@ Each game has its own versions and releases, tagged `jsrf-v…` and
 `mc3-v…`. The runtime in `core/` is shared, so a change listed for one game
 reaches the other one's next release too.
 
-## JSRF PC, unreleased
+## JSRF PC 0.2.0 (2026-10-14)
 
-* Built on the runtime shared with MC3 PC, which picked up everything listed
-  under MC3 PC 0.1.0. Not played with Jet Set Radio Future yet; use the
-  0.1.0 release to play.
+* JSRF PC now runs on the runtime it shares with MC3 PC, which picked up
+  everything listed under MC3 PC 0.1.0. Jet Set Radio Future plays the same
+  as on 0.1.0: tested in the game at a steady 60 fps on the same PC.
+* New options for testing: `--ds-trace` (DirectSound calls and mixer
+  levels) and `--control` (commands while the game runs, including a capture
+  of every draw call in a frame).
 
 ## MC3 PC 0.1.0 (2026-10-14)
 

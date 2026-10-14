@@ -6,7 +6,7 @@ settings menu:
 
 | | Game | Port | Status |
 |---|---|---|---|
-| <img src="titles/jsrf/res/icon.png" width="40" alt=""> | **Jet Set Radio Future** (2002) | **JSRF PC** (`jsrf.exe`) | 0.1.0: boot through the tutorial at 60 fps |
+| <img src="titles/jsrf/res/icon.png" width="40" alt=""> | **Jet Set Radio Future** (2002) | **JSRF PC** (`jsrf.exe`) | 0.2.0: boot through the tutorial at 60 fps |
 | <img src="titles/mc3/res/icon.png" width="40" alt=""> | **Midnight Club 3: DUB Edition Remix** (2006) | **MC3 PC** (`mc3.exe`) | 0.1.0: menus, Career start and free-roam driving at 30 fps |
 
 <p align="center">
@@ -45,12 +45,13 @@ version check, its symbol table and a few patches) lives in `titles/<game>/`.
 
 ## Status
 
-### JSRF PC 0.1.0
+### JSRF PC 0.2.0
 
 Played for over 45 minutes on Windows 11 with an NVIDIA RTX 5090 and a
 wireless Xbox controller, from boot through the intro, title screen, New
 Game and the tutorial, at a steady 60 fps with sound in 4K borderless
-fullscreen.
+fullscreen. 0.2.0 runs on the runtime it now shares with MC3 PC and was
+played again on the same PC, with no difference from 0.1.0.
 
 <p align="center">
   <img src="docs/screenshots/garage.jpg" width="49%" alt="Skating in the Garage at the start of the game">
@@ -88,9 +89,6 @@ way into the city.
   but haven't been tried.
 * **Multiplayer is untested.** Up to four controllers are supported, but
   nobody has played split screen on it yet.
-* JSRF PC from the `main` branch is built on the runtime as it is now,
-  which changed a lot for Midnight Club 3 and hasn't been played with Jet
-  Set Radio Future yet. To play JSRF, use the 0.1.0 release.
 
 ## Getting started
 
